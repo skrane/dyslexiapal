@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dyslexia Pal — Building Confidence, One Word at a Time</title>
+<meta name="description" content="Dyslexia Pal is an affordable, at-home program that helps children with dyslexia. Free AI screening plus a personalized, gamified tutor that listens as your child reads aloud.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#097276; --teal-dark:#075457; --coral:#FF6254; --coral-dark:#E5533F;
+    --amber:#F59E0B; --amber-dark:#D66A00;
+    --ink:#0F172A; --body:#45525F; --muted:#6B7787;
+    --bg:#FFFFFF; --tint-teal:#E8F5F5; --tint-coral:#FFF0ED; --tint-amber:#FFF7E8;
+    --cream:#FBFAF7; --line:#E9E7E2; --card:#FFFFFF;
+    --radius:20px; --shadow:0 20px 45px -24px rgba(9,114,118,0.28);
+    --transition:all .2s ease;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Sora',system-ui,sans-serif;color:var(--body);background:var(--bg);
+    line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px;}
+  h1,h2,h3,h4{color:var(--ink);line-height:1.2;font-weight:700;letter-spacing:-0.02em;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding-inline:24px;}
+  .accent-teal{color:var(--teal);} .accent-coral{color:var(--coral);}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:inherit;
+    font-weight:600;font-size:16px;border-radius:999px;cursor:pointer;transition:var(--transition);
+    padding:14px 26px;border:2px solid transparent;white-space:nowrap;}
+  .btn-coral{background:var(--coral);color:#fff;}
+  .btn-coral:hover{background:var(--coral-dark);transform:translateY(-2px);}
+  .btn-teal{background:var(--teal);color:#fff;}
+  .btn-teal:hover{background:var(--teal-dark);transform:translateY(-2px);}
+  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+
+  /* header */
+  header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px;}
+  .brand img{height:38px;width:auto;}
+  .nav-mid{display:flex;gap:30px;font-size:15.5px;font-weight:500;color:var(--ink);}
+  .nav-mid a:hover{color:var(--teal);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;cursor:pointer;border-radius:10px;}
+  .hamburger span{display:block;height:2.5px;width:100%;background:var(--ink);border-radius:2px;transition:var(--transition);}
+  .nav-mobile{display:none;flex-direction:column;padding:6px 24px 20px;}
+  .nav-mobile a{padding:14px 2px;font-size:17px;font-weight:600;color:var(--ink);border-top:1px solid var(--line);}
+  .nav-toggle:checked ~ .nav-mobile{display:flex;}
+  .nav-toggle:checked ~ .nav .hamburger span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+  .nav-toggle:checked ~ .nav .hamburger span:nth-child(2){opacity:0;}
+  .nav-toggle:checked ~ .nav .hamburger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+
+  /* hero */
+  .hero{padding:76px 0 84px;background:
+    radial-gradient(1200px 500px at 85% -10%, var(--tint-teal), transparent 60%),
+    radial-gradient(900px 500px at 5% 110%, var(--tint-coral), transparent 55%);}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:52px;align-items:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);
+    color:var(--teal);font-weight:600;font-size:13.5px;letter-spacing:0.04em;text-transform:uppercase;
+    padding:8px 16px;border-radius:999px;box-shadow:var(--shadow);}
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);}
+  .hero h1{font-size:clamp(36px,5.4vw,58px);font-weight:800;margin:22px 0 20px;}
+  .hero p.lead{font-size:19px;max-width:33em;margin-bottom:30px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .hero-note{margin-top:18px;font-size:14.5px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+  .hero-media{position:relative;}
+  .hero-media>img{width:100%;border-radius:28px;box-shadow:0 40px 80px -30px rgba(9,114,118,0.45);}
+  .hero-badge{position:absolute;left:-14px;bottom:26px;background:#fff;border-radius:16px;
+    padding:14px 18px;box-shadow:0 20px 40px -18px rgba(0,0,0,0.3);display:flex;align-items:center;gap:12px;}
+  .hero-badge .ic{width:42px;height:42px;border-radius:12px;background:var(--tint-teal);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .hero-badge b{color:var(--ink);font-size:15px;display:block;}
+  .hero-badge span{font-size:13px;color:var(--muted);}
+  @media(min-width:900px){.hero-grid{grid-template-columns:1.05fr 1fr;}}
+
+  /* stat band */
+  .stats{background:var(--teal);color:#fff;}
+  .stats .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:30px 20px;padding:44px 24px;}
+  .stat b{display:block;font-size:34px;font-weight:800;color:#fff;letter-spacing:-0.02em;}
+  .stat span{font-size:14.5px;color:#CDE7E8;line-height:1.5;display:block;margin-top:4px;}
+  .stats-src{grid-column:1/-1;text-align:center;color:#9FCFD1;font-size:12.5px;margin-top:2px;}
+  @media(min-width:760px){.stats .wrap{grid-template-columns:repeat(4,1fr);}}
+
+  /* generic section */
+  section.block{padding:88px 0;}
+  .block.cream{background:var(--cream);}
+  .kicker{display:inline-block;font-weight:700;font-size:14px;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--coral);margin-bottom:14px;}
+  .sec-head{max-width:40em;margin-bottom:52px;}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;}
+  .sec-head p{font-size:18px;margin-top:16px;}
+
+  /* problem cards */
+  .grid{display:grid;gap:22px;}
+  .cards-2{grid-template-columns:1fr;}
+  .cards-3{grid-template-columns:1fr;}
+  .cards-4{grid-template-columns:1fr;}
+  @media(min-width:640px){.cards-2{grid-template-columns:1fr 1fr;}.cards-4{grid-template-columns:1fr 1fr;}}
+  @media(min-width:900px){.cards-3{grid-template-columns:repeat(3,1fr);}.cards-4{grid-template-columns:repeat(4,1fr);}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;transition:var(--transition);}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .card .ic{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;
+    justify-content:center;margin-bottom:18px;}
+  .ic.teal{background:var(--tint-teal);color:var(--teal);}
+  .ic.coral{background:var(--tint-coral);color:var(--coral-dark);}
+  .ic.amber{background:var(--tint-amber);color:var(--amber-dark);}
+  .card h3{font-size:19.5px;margin-bottom:9px;}
+  .card p{font-size:15.5px;color:var(--body);}
+
+  /* solution split */
+  .split{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
+  @media(min-width:900px){.split{grid-template-columns:1fr 1fr;}.split.rev .split-media{order:-1;}}
+  .split-media img{border-radius:22px;border:1px solid var(--line);box-shadow:var(--shadow);width:100%;}
+  .feature-list{list-style:none;margin-top:10px;}
+  .feature-list li{display:flex;gap:15px;padding:15px 0;border-top:1px solid var(--line);}
+  .feature-list li:first-child{border-top:none;}
+  .feature-list .fic{width:40px;height:40px;border-radius:11px;flex-shrink:0;display:flex;
+    align-items:center;justify-content:center;background:var(--tint-teal);color:var(--teal);}
+  .feature-list b{color:var(--ink);font-size:16.5px;}
+  .feature-list p{font-size:15px;margin-top:3px;}
+
+  /* steps */
+  .steps{display:grid;gap:24px;grid-template-columns:1fr;counter-reset:step;}
+  @media(min-width:640px){.steps{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1000px){.steps{grid-template-columns:repeat(4,1fr);}}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 24px;position:relative;}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;
+    font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .step:nth-child(2) .num{background:var(--coral);}
+  .step:nth-child(3) .num{background:var(--amber);}
+  .step:nth-child(4) .num{background:var(--teal-dark);}
+  .step h3{font-size:18.5px;margin-bottom:8px;}
+  .step p{font-size:15px;}
+
+  /* story */
+  .story{background:var(--tint-teal);}
+  .story .split-media img{border-radius:22px;background:#fff;padding:26px;}
+  .story blockquote{font-size:20px;color:var(--ink);font-weight:600;line-height:1.5;
+    border-left:4px solid var(--coral);padding-left:22px;margin:24px 0;}
+
+  /* team */
+  .team-grid{display:grid;gap:26px;grid-template-columns:1fr;}
+  @media(min-width:600px){.team-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:960px){.team-grid{grid-template-columns:repeat(4,1fr);}}
+  .member{text-align:center;}
+  .member .ph{width:130px;height:130px;border-radius:50%;object-fit:cover;margin:0 auto 18px;
+    background:var(--tint-teal);border:4px solid #fff;box-shadow:var(--shadow);}
+  .member h3{font-size:18px;}
+  .member .role{color:var(--teal);font-weight:600;font-size:14px;margin:2px 0 10px;}
+  .member p{font-size:14px;color:var(--body);}
+
+  /* CTA / waitlist */
+  .cta{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;text-align:center;}
+  .cta h2{color:#fff;font-size:clamp(28px,3.6vw,40px);font-weight:800;}
+  .cta p{color:#CDE7E8;font-size:18px;max-width:34em;margin:16px auto 30px;}
+  .waitlist{display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+  .waitlist input{flex:1;min-width:220px;padding:15px 20px;border-radius:999px;border:none;
+    font-family:inherit;font-size:16px;color:var(--ink);}
+  .waitlist input:focus{outline:3px solid var(--amber);}
+  .cta small{display:block;margin-top:16px;color:#9FCFD1;font-size:13.5px;}
+  #wl-thanks{display:none;background:rgba(255,255,255,0.14);border-radius:16px;padding:18px 22px;
+    max-width:480px;margin:0 auto;font-size:16px;color:#fff;}
+
+  /* footer */
+  footer{background:var(--ink);color:#AEB6C2;padding:52px 0 30px;}
+  .foot-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start;}
+  footer img{height:34px;filter:brightness(0) invert(1);margin-bottom:14px;}
+  .foot-tag{max-width:22em;font-size:14.5px;}
+  .foot-nav{display:flex;gap:26px;flex-wrap:wrap;font-size:14.5px;}
+  .foot-nav a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,0.1);margin-top:34px;padding-top:22px;
+    font-size:13px;color:#7A8494;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+
+  @media(max-width:820px){
+    .nav-mid,.nav-right{display:none;}
+    .hamburger{display:flex;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
+  <div class="wrap nav">
+    <a href="#" class="brand"><img src="assets/dp-logo-wordmark.png" alt="Dyslexia Pal"></a>
+    <nav class="nav-mid">
+      <a href="#problem">The Problem</a>
+      <a href="#how">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#story">Our Story</a>
+      <a href="#team">Team</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#waitlist" class="btn btn-coral">Join the Waitlist</a>
+    </div>
+    <label for="nav-toggle" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></label>
+  </div>
+  <div class="nav-mobile wrap">
+    <a href="#problem">The Problem</a>
+    <a href="#how">How It Works</a>
+    <a href="#features">Features</a>
+    <a href="#story">Our Story</a>
+    <a href="#team">Team</a>
+    <a href="#waitlist" class="btn btn-coral" style="margin-top:14px;">Join the Waitlist</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Affordable dyslexia support at home</span>
+      <h1>Building confidence, <span class="accent-coral">one word at a time.</span></h1>
+      <p class="lead">Dyslexia Pal helps your child read with confidence. Start with a free
+        AI-powered screening, then follow a personalized, playful learning plan with a virtual
+        tutor that listens as your child reads aloud. No costly assessments. No waiting lists.</p>
+      <div class="hero-ctas">
+        <a href="#waitlist" class="btn btn-coral">Join the Waitlist</a>
+        <a href="#how" class="btn btn-ghost">See How It Works</a>
+      </div>
+      <div class="hero-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#097276" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Free screening &nbsp;•&nbsp; Made for families &nbsp;•&nbsp; Backed by the science of reading
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="assets/hero-child.jpg" alt="A happy child with a backpack, smiling">
+      <div class="hero-badge">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#097276" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg></span>
+        <div><b>Reads along with your child</b><span>Real-time verbal feedback</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b>1 in 5</b><span>children have dyslexia, yet most go undiagnosed</span></div>
+    <div class="stat"><b>10.9M</b><span>U.S. children under 14 living with dyslexia</span></div>
+    <div class="stat"><b>$5,000</b><span>what a private assessment can cost a family</span></div>
+    <div class="stat"><b>804K</b><span>new kindergarteners with dyslexia every year</span></div>
+    <div class="stats-src">Source: Yale Center for Dyslexia &amp; Creativity</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="block" id="problem">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">The Problem</span>
+      <h2>Support has been too slow, too costly, and too hard to find</h2>
+      <p>Dyslexia is common and highly treatable, but the help families need has been out of reach
+        for far too many.</p>
+    </div>
+    <div class="grid cards-4">
+      <div class="card">
+        <div class="ic coral"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Widely undiagnosed</h3>
+        <p>Dyslexia affects 1 in 5 children, yet the majority are never identified, so they never get the right help.</p>
+      </div>
+      <div class="card">
+        <div class="ic amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Costly screening</h3>
+        <p>Private assessments can cost up to $5,000, putting early diagnosis out of reach for most families.</p>
+      </div>
+      <div class="card">
+        <div class="ic teal"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Too few specialists</h3>
+        <p>A shortage of certified dyslexia teachers leaves families without the qualified support their children need.</p>
+      </div>
+      <div class="card">
+        <div class="ic coral"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <h3>Emotional toll</h3>
+        <p>Untreated dyslexia can lead to anxiety, low self-esteem, and higher dropout rates over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="block cream" id="solution">
+  <div class="wrap split">
+    <div>
+      <span class="kicker">The Solution</span>
+      <h2 style="font-size:clamp(28px,3.6vw,40px);">A better way, right from your living room</h2>
+      <p style="margin-top:16px;">Dyslexia Pal brings screening and tutoring home, so every family
+        can act early, without the cost or the wait.</p>
+      <ul class="feature-list">
+        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg></span>
+          <div><b>Free AI screening</b><p>Our AI listens to your child speak and read to quickly flag risk factors, no clinic visit required.</p></div></li>
+        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+          <div><b>Personalized at-home tutoring</b><p>A learning plan built around your child's exact level and needs, available anytime.</p></div></li>
+        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <div><b>Confidence, not just skills</b><p>Playful, encouraging sessions rebuild self-esteem while they strengthen reading.</p></div></li>
+        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
+          <div><b>Affordable for every family</b><p>Simple subscription pricing, a fraction of the cost of traditional testing and tutoring.</p></div></li>
+      </ul>
+    </div>
+    <div class="split-media">
+      <img src="assets/activity-build-word.png" alt="Dyslexia Pal 'Build the word' learning activity">
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="block" id="how">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">How It Works</span>
+      <h2>A guided journey, in four simple steps</h2>
+      <p>We meet each child where they are and support them every step of the way.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Smart Screening</h3><p>A quick, free AI screening spots risk factors using your child's speech and reading.</p></div>
+      <div class="step"><div class="num">2</div><h3>Personalized Plan</h3><p>We instantly build a learning plan matched to your child's starting level and needs.</p></div>
+      <div class="step"><div class="num">3</div><h3>Gamified Learning</h3><p>Story adventures and mini-games make daily practice feel like play, not homework.</p></div>
+      <div class="step"><div class="num">4</div><h3>Progress Tracking</h3><p>Parents follow every win with clear dashboards that show real, steady growth.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="block cream" id="features">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">Features</span>
+      <h2>Everything your child needs to thrive</h2>
+      <p>A complete, engaging program that adapts to your child and grows with them.</p>
+    </div>
+    <div class="grid cards-3">
+      <div class="card"><div class="ic teal"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4M8 9v4M15 12h.01M18 10h.01"/><rect x="2" y="6" width="20" height="12" rx="4"/></svg></div><h3>Gamified learning</h3><p>Immersive story adventures, mini-games, stars, badges, and leaderboard milestones keep kids motivated to keep going.</p></div>
+      <div class="card"><div class="ic coral"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Virtual Tutor&reg;</h3><p>Real-time verbal feedback guides your child as they read aloud, adapting to their pace and building confidence.</p></div>
+      <div class="card"><div class="ic amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 4 14 2-7h3M19 12h3"/></svg></div><h3>Speech recognition</h3><p>Dyslexia Pal listens as your child reads to detect accuracy and fluency, strengthening skills with every session. No certified tutor required.</p></div>
+      <div class="card"><div class="ic teal"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Personalized plan</h3><p>Every child gets a program as unique as they are, built for individual success with no one-size-fits-all approach.</p></div>
+      <div class="card"><div class="ic coral"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Parent community</h3><p>Our Parent Circle connects you with families on the same journey to share strategies, celebrate wins, and find support.</p></div>
+      <div class="card"><div class="ic amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><h3>Progress dashboards</h3><p>Watch reading accuracy, pacing, and word recognition improve with easy-to-read progress tracking for parents.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="block story" id="story">
+  <div class="wrap split rev">
+    <div>
+      <span class="kicker">Our Story</span>
+      <h2 style="font-size:clamp(28px,3.6vw,40px);">Why Dyslexia Pal exists</h2>
+      <p style="margin-top:16px;">When Olivia, daughter of Dyslexia Pal co-founder Josh Davis, was
+        diagnosed with dyslexia, her family ran into the same three walls so many parents hit:
+        schools that were unequipped, too few certified dyslexia teachers, and a cost structure
+        built for the wealthy.</p>
+      <blockquote>"This wasn't just our struggle. It was everyone's struggle."</blockquote>
+      <p>That realization became our mission: to make effective dyslexia support accessible,
+        affordable, and compassionate, so no child is left behind because of how they read.</p>
+    </div>
+    <div class="split-media">
+      <img src="assets/dp-logo-full.png" alt="Dyslexia Pal logo">
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="block" id="team">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">Meet the Team</span>
+      <h2>Builders, educators, and parents on a mission</h2>
+    </div>
+    <div class="team-grid">
+      <div class="member">
+        <img class="ph" src="assets/team-1.jpeg" alt="Steven Krane">
+        <h3>Steven Krane</h3>
+        <div class="role">Chief Strategy Officer</div>
+        <p>Founder and builder of twelve companies across six industries with multiple exits, bringing that builder's instinct to every venture.</p>
+      </div>
+      <div class="member">
+        <img class="ph" src="assets/team-2.png" alt="Joshua Davis">
+        <h3>Joshua Davis</h3>
+        <div class="role">Chief Executive Officer</div>
+        <p>A proven leader in life sciences and healthcare. Inspired by his daughter Olivia's journey, he shapes our strategy and partnerships.</p>
+      </div>
+      <div class="member">
+        <img class="ph" src="assets/team-3.png" alt="Nanci Shepardson">
+        <h3>Nanci Shepardson</h3>
+        <div class="role">Chief Content Officer</div>
+        <p>A K-12 reading specialist (Wilson, CERI, CPACC certified) and champion of the Science of Reading who raised a child with dyslexia.</p>
+      </div>
+      <div class="member">
+        <img class="ph" src="assets/team-4.png" alt="Mark A">
+        <h3>Mark A.</h3>
+        <div class="role">Chief Technology Officer</div>
+        <p>35+ years in software, systems architecture, and AI, building mission-driven technology with real-world impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / WAITLIST -->
+<section class="block cta" id="waitlist">
+  <div class="wrap">
+    <h2>Give your child a confident start</h2>
+    <p>Join the waitlist to be first in line when Dyslexia Pal opens, plus early-access updates for families.</p>
+    <form class="waitlist" id="wl-form">
+      <input type="email" id="wl-email" placeholder="Enter your email" required aria-label="Email address">
+      <button type="submit" class="btn btn-coral">Join the Waitlist</button>
+    </form>
+    <div id="wl-thanks">Thank you! You're on the list. We'll be in touch soon. 🎉</div>
+    <small>We'll only email you about Dyslexia Pal. No spam, ever.</small>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <img src="assets/dp-logo-wordmark.png" alt="Dyslexia Pal">
+        <p class="foot-tag">Building confidence, one word at a time. Affordable, at-home dyslexia support for every family.</p>
+      </div>
+      <nav class="foot-nav">
+        <a href="#problem">The Problem</a>
+        <a href="#how">How It Works</a>
+        <a href="#features">Features</a>
+        <a href="#story">Our Story</a>
+        <a href="#team">Team</a>
+        <a href="#waitlist">Join the Waitlist</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Dyslexia Pal. All rights reserved.</span>
+      <span>dyslexiapal.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile menu closes on link tap
+  document.querySelectorAll('.nav-mobile a').forEach(function(a){
+    a.addEventListener('click',function(){document.getElementById('nav-toggle').checked=false;});
+  });
+  // waitlist form (front-end only for now; connect to an email service before launch)
+  document.getElementById('wl-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('wl-form').style.display='none';
+    document.getElementById('wl-thanks').style.display='block';
+  });
+</script>
+</body>
+</html>
