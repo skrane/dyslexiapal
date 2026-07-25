@@ -188,6 +188,17 @@
   .faq-body{padding:0 24px 24px;font-size:16px;line-height:1.75;color:var(--body);}
   @media(hover:hover){.faq>summary:hover{color:var(--teal);}}
 
+  /* CONTACT FORM */
+  .contact-form{display:flex;flex-direction:column;gap:14px;max-width:520px;margin:44px auto 0;}
+  .contact-form input,.contact-form textarea{width:100%;padding:14px 16px;border:1px solid var(--line);
+    border-radius:12px;font-family:inherit;font-size:16px;color:var(--ink);background:#fff;}
+  .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--teal);
+    box-shadow:0 0 0 3px var(--tint-teal);}
+  .contact-form textarea{resize:vertical;min-height:120px;}
+  .contact-form button{align-self:center;margin-top:4px;}
+  .form-thanks{display:none;text-align:center;background:var(--tint-teal);color:var(--teal-dark);
+    border-radius:14px;padding:22px 24px;font-size:16px;font-weight:600;max-width:520px;margin:44px auto 0;}
+
   /* CTA / waitlist */
   .cta{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;text-align:center;}
   .cta h2{color:#fff;font-size:clamp(28px,3.6vw,40px);font-weight:800;}
@@ -229,7 +240,7 @@
       <a href="#approach">Our Approach</a>
       <a href="#team">Team</a>
       <a href="#faqs">FAQs</a>
-      <a href="mailto:jmd227@gmail.com">Contact us</a>
+      <a href="#contact">Contact us</a>
     </nav>
     <div class="nav-right">
       <a href="#waitlist" class="btn btn-coral">Join the Waitlist</a>
@@ -243,7 +254,7 @@
     <a href="#approach">Our Approach</a>
     <a href="#team">Team</a>
     <a href="#faqs">FAQs</a>
-    <a href="mailto:jmd227@gmail.com">Contact us</a>
+    <a href="#contact">Contact us</a>
     <a href="#waitlist" class="btn btn-coral" style="margin-top:14px;">Join the Waitlist</a>
   </div>
 </header>
@@ -323,25 +334,33 @@
 
 <!-- SOLUTION -->
 <section class="block cream" id="solution">
-  <div class="wrap split">
-    <div>
+  <div class="wrap">
+    <div class="sec-head center">
       <span class="kicker">The Solution</span>
-      <h2 style="font-size:clamp(28px,3.6vw,40px);">A better way, right from your living room</h2>
-      <p style="margin-top:16px;">Dyslexia Pal brings screening and tutoring home, so every family
-        can act early, without the cost or the wait.</p>
-      <ul class="feature-list">
-        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/></svg></span>
-          <div><b>Free AI screening</b><p>Our AI listens to your child speak and read to quickly flag risk factors, no clinic visit required.</p></div></li>
-        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-          <div><b>Personalized at-home tutoring</b><p>A learning plan built around your child's exact level and needs, available anytime.</p></div></li>
-        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-          <div><b>Confidence, not just skills</b><p>Playful, encouraging sessions rebuild self-esteem while they strengthen reading.</p></div></li>
-        <li><span class="fic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
-          <div><b>Affordable for every family</b><p>Simple subscription pricing, a fraction of the cost of traditional testing and tutoring.</p></div></li>
-      </ul>
+      <h2>A better way, right from your living room</h2>
+      <p>Dyslexia Pal brings screening and tutoring home, so every family can act early, without the cost or the wait.</p>
     </div>
-    <div class="split-media">
-      <img src="assets/activity-build-word.png" alt="Dyslexia Pal 'Build the word' learning activity">
+    <div class="grid cards-2">
+      <div class="card">
+        <div class="ic teal"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg></div>
+        <h3>Free AI screening</h3>
+        <p>Our AI listens as your child speaks and reads to quickly flag risk factors, with no clinic visit required.</p>
+      </div>
+      <div class="card">
+        <div class="ic coral"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <h3>Personalized at-home tutoring</h3>
+        <p>A learning plan built around your child's exact level and needs, available anytime.</p>
+      </div>
+      <div class="card">
+        <div class="ic amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <h3>Confidence, not just skills</h3>
+        <p>Playful, encouraging sessions rebuild self-esteem while they strengthen reading.</p>
+      </div>
+      <div class="card">
+        <div class="ic teal"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+        <h3>Affordable for every family</h3>
+        <p>Simple subscription pricing, a fraction of the cost of traditional testing and tutoring.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -477,13 +496,32 @@
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">Contact Us</span>
+      <h2>Get in touch</h2>
+      <p>Questions about Dyslexia Pal? Send us a note and we'll get back to you.</p>
+    </div>
+    <form id="contact-form" class="contact-form">
+      <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
+      <input type="email" name="email" placeholder="Your email" required aria-label="Your email">
+      <textarea name="message" placeholder="How can we help?" required aria-label="Message"></textarea>
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <button type="submit" class="btn btn-coral">Send Message</button>
+    </form>
+    <div id="contact-thanks" class="form-thanks">Thanks! Your message is on its way. We'll be in touch soon. 🎉</div>
+  </div>
+</section>
+
 <!-- CTA / WAITLIST -->
 <section class="block cta" id="waitlist">
   <div class="wrap">
     <h2>Give your child a confident start</h2>
     <p>Join the waitlist to be first in line when Dyslexia Pal launches, plus early-access updates for families.</p>
     <form class="waitlist" id="wl-form">
-      <input type="email" id="wl-email" placeholder="Enter your email" required aria-label="Email address">
+      <input type="email" id="wl-email" name="email" placeholder="Enter your email" required aria-label="Email address">
       <button type="submit" class="btn btn-coral">Join the Waitlist</button>
     </form>
     <div id="wl-thanks">Thank you! You're on the list. We'll be in touch soon. 🎉</div>
@@ -506,7 +544,7 @@
         <a href="#approach">Our Approach</a>
         <a href="#team">Team</a>
         <a href="#faqs">FAQs</a>
-        <a href="mailto:jmd227@gmail.com">Contact us</a>
+        <a href="#contact">Contact us</a>
         <a href="#waitlist">Join the Waitlist</a>
       </nav>
     </div>
@@ -522,16 +560,23 @@
   document.querySelectorAll('.nav-mobile a').forEach(function(a){
     a.addEventListener('click',function(){document.getElementById('nav-toggle').checked=false;});
   });
-  // waitlist form: open the visitor's email addressed to jmd227@gmail.com
-  document.getElementById('wl-form').addEventListener('submit',function(e){
-    e.preventDefault();
-    var email=document.getElementById('wl-email').value;
-    var subject=encodeURIComponent('Waitlist - Dyslexia Pal');
-    var body=encodeURIComponent('Please add me to the Dyslexia Pal waitlist.\n\nEmail: '+email);
-    window.location.href='mailto:jmd227@gmail.com?subject='+subject+'&body='+body;
-    document.getElementById('wl-form').style.display='none';
-    document.getElementById('wl-thanks').style.display='block';
-  });
+  // Forms email submissions to jmd227@gmail.com via FormSubmit (no email app needed)
+  function wireForm(form, thanksEl, subject){
+    if(!form) return;
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var data=new FormData(form);
+      data.append('_subject',subject);
+      data.append('_captcha','false');
+      fetch('https://formsubmit.co/ajax/jmd227@gmail.com',{
+        method:'POST',headers:{'Accept':'application/json'},body:data
+      }).catch(function(){});
+      form.style.display='none';
+      thanksEl.style.display='block';
+    });
+  }
+  wireForm(document.getElementById('wl-form'), document.getElementById('wl-thanks'), 'Waitlist - Dyslexia Pal');
+  wireForm(document.getElementById('contact-form'), document.getElementById('contact-thanks'), 'Contact - Dyslexia Pal');
 </script>
 </body>
 </html>
