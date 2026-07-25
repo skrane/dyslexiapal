@@ -526,7 +526,7 @@
   document.getElementById('wl-form').addEventListener('submit',function(e){
     e.preventDefault();
     var email=document.getElementById('wl-email').value;
-    var subject=encodeURIComponent('Waitlist - Dyslexia.com');
+    var subject=encodeURIComponent('Waitlist - Dyslexia Pal');
     var body=encodeURIComponent('Please add me to the Dyslexia Pal waitlist.\n\nEmail: '+email);
     window.location.href='mailto:jmd227@gmail.com?subject='+subject+'&body='+body;
     document.getElementById('wl-form').style.display='none';
