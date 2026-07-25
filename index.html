@@ -48,7 +48,7 @@
     backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
   .nav{display:flex;align-items:center;justify-content:space-between;height:88px;gap:16px;}
   .brand img{height:60px;width:auto;}
-  .nav-mid{display:flex;gap:30px;font-size:15.5px;font-weight:500;color:var(--ink);}
+  .nav-mid{display:flex;gap:23px;font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap;}
   .nav-mid a:hover{color:var(--teal);}
   .nav-right{display:flex;align-items:center;gap:14px;}
   .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;cursor:pointer;border-radius:10px;}
@@ -161,6 +161,21 @@
   .member .role{color:var(--teal);font-weight:600;font-size:14px;margin:2px 0 10px;}
   .member p{font-size:14px;color:var(--body);}
 
+  /* OUR APPROACH */
+  .approach-grid{display:grid;gap:22px;grid-template-columns:1fr;}
+  @media(min-width:640px){.approach-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:980px){.approach-grid{grid-template-columns:repeat(3,1fr);}}
+  .appr{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 26px;transition:var(--transition);}
+  .appr:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .appr-top{display:flex;align-items:center;gap:13px;margin-bottom:14px;}
+  .appr-num{width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;
+    font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .approach-grid .appr:nth-child(3n+2) .appr-num{background:var(--coral);}
+  .approach-grid .appr:nth-child(3n) .appr-num{background:var(--amber);}
+  .appr-cat{font-weight:700;font-size:12.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);}
+  .appr h3{font-size:19px;margin-bottom:8px;}
+  .appr p{font-size:15px;color:var(--body);line-height:1.65;}
+
   /* FAQ */
   .faq-list{max-width:760px;margin:46px auto 0;display:flex;flex-direction:column;gap:14px;}
   .faq{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;transition:var(--transition);}
@@ -195,7 +210,7 @@
   .foot-bottom{border-top:1px solid rgba(255,255,255,0.1);margin-top:34px;padding-top:22px;
     font-size:13px;color:#7A8494;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
 
-  @media(max-width:820px){
+  @media(max-width:1080px){
     .nav-mid,.nav-right{display:none;}
     .hamburger{display:flex;}
   }
@@ -211,6 +226,7 @@
       <a href="#problem">The Problem</a>
       <a href="#how">How It Works</a>
       <a href="#features">Features</a>
+      <a href="#approach">Our Approach</a>
       <a href="#story">Our Story</a>
       <a href="#team">Team</a>
       <a href="#faqs">FAQs</a>
@@ -224,6 +240,7 @@
     <a href="#problem">The Problem</a>
     <a href="#how">How It Works</a>
     <a href="#features">Features</a>
+    <a href="#approach">Our Approach</a>
     <a href="#story">Our Story</a>
     <a href="#team">Team</a>
     <a href="#faqs">FAQs</a>
@@ -365,6 +382,25 @@
   </div>
 </section>
 
+<!-- OUR APPROACH -->
+<section class="block" id="approach">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">Our Approach</span>
+      <h2>Structured, engaging, and rooted in research</h2>
+      <p>Dyslexia Pal is not a one-size-fits-all app. It pairs the evidence-based methods behind structured literacy with adaptive AI, so every child follows a path built from their own results. Every journey starts with a careful screening.</p>
+    </div>
+    <div class="approach-grid">
+      <div class="appr"><div class="appr-top"><span class="appr-num">1</span><span class="appr-cat">Foundation</span></div><h3>Built on the Science of Reading</h3><p>A structured, systematic, and cumulative approach grounded in how dyslexic brains learn to decode, bringing sight, sound, and voice together.</p></div>
+      <div class="appr"><div class="appr-top"><span class="appr-num">2</span><span class="appr-cat">Screening</span></div><h3>Screening first, always</h3><p>Our free AI screening listens as your child reads and speaks to pinpoint phonological awareness, decoding, and fluency, so we know exactly where the gaps are.</p></div>
+      <div class="appr"><div class="appr-top"><span class="appr-num">3</span><span class="appr-cat">Plan</span></div><h3>A plan built for your child</h3><p>Phonics, fluency, comprehension, spelling, and vocabulary, sequenced to your child's results, never a generic workbook.</p></div>
+      <div class="appr"><div class="appr-top"><span class="appr-num">4</span><span class="appr-cat">Practice</span></div><h3>Practice that feels like play</h3><p>Gamified, confidence-building sessions with a Virtual Tutor that listens as your child reads aloud. Short, high-energy, and full of real wins. Built for kids with ADHD too.</p></div>
+      <div class="appr"><div class="appr-top"><span class="appr-num">5</span><span class="appr-cat">Monitor</span></div><h3>Progress parents can see</h3><p>Clear dashboards track accuracy, fluency, and word recognition over time, showing real growth with no jargon.</p></div>
+      <div class="appr"><div class="appr-top"><span class="appr-num">6</span><span class="appr-cat">Partnership</span></div><h3>Support beyond the screen</h3><p>A Parent Circle community and practical guidance, plus insights you can share with your child's teachers and specialists.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- STORY -->
 <section class="block story" id="story">
   <div class="wrap split rev">
@@ -487,8 +523,10 @@
         <a href="#problem">The Problem</a>
         <a href="#how">How It Works</a>
         <a href="#features">Features</a>
+        <a href="#approach">Our Approach</a>
         <a href="#story">Our Story</a>
         <a href="#team">Team</a>
+        <a href="#faqs">FAQs</a>
         <a href="#waitlist">Join the Waitlist</a>
       </nav>
     </div>
