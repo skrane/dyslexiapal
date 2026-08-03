@@ -1,0 +1,16 @@
+# Private — never publish to the public GitHub Pages repo
+project-brief.md
+
+# Local Claude Code config & guidance (machine-local, not for the public site)
+.claude/
+CLAUDE.md
+
+# OS / editor junk
+.DS_Store
+**/.DS_Store
+*.inspect.ndjson
+
+# Unused reference assets (kept locally, not part of the live site)
+# Delete these lines if you ever want to publish them.
+assets/Dyslexia_Pal_Icon.png
+assets/ppt-icons/
