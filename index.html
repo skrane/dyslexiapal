@@ -151,15 +151,20 @@
     border-left:4px solid var(--coral);padding-left:22px;margin:24px 0;}
 
   /* team */
-  .team-grid{display:grid;grid-template-columns:1fr;gap:40px 30px;max-width:1040px;margin:0 auto;}
+  .team-grid{display:grid;grid-template-columns:1fr;gap:30px;max-width:1040px;margin:0 auto;}
   @media(min-width:600px){.team-grid{grid-template-columns:repeat(2,1fr);}}
   @media(min-width:960px){.team-grid{grid-template-columns:repeat(4,1fr);}}
-  .member{text-align:center;}
-  .member .ph{width:130px;height:130px;border-radius:50%;object-fit:cover;margin:0 auto 18px;
-    background:var(--tint-teal);border:4px solid #fff;box-shadow:var(--shadow);}
-  .member h3{font-size:18px;}
-  .member .role{color:var(--teal);font-weight:600;font-size:14px;margin:2px 0 10px;}
-  .member p{font-size:14px;color:var(--body);}
+  .member{text-align:left;}
+  .member .card-top{border-radius:18px;padding:24px 22px 22px;border:1px solid rgba(15,23,42,0.06);}
+  .member .ph{width:84px;height:84px;border-radius:50%;object-fit:cover;margin:0 0 16px;
+    background:#fff;border:4px solid #fff;box-shadow:0 8px 18px -8px rgba(9,114,118,0.35);}
+  .member h3{font-size:20px;color:var(--teal);font-weight:800;margin-bottom:4px;}
+  .member .role{color:var(--ink);font-weight:700;font-size:14.5px;line-height:1.3;min-height:2.6em;margin:0;}
+  .member .bio{font-size:14px;color:var(--body);line-height:1.6;margin:16px 2px 0;}
+  .card-rose{background:#F8E1E1;}
+  .card-gold{background:#FBEDC4;}
+  .card-sky{background:#DCEBF1;}
+  .card-sky2{background:#E6EFF3;}
 
   /* OUR APPROACH */
   .approach-grid{display:grid;gap:22px;grid-template-columns:1fr;}
@@ -441,28 +446,36 @@
     </div>
     <div class="team-grid">
       <div class="member">
-        <img class="ph" src="assets/team-2.png" alt="Joshua Davis">
-        <h3>Joshua Davis</h3>
-        <div class="role">Co-Founder &amp;<br>Chief Executive Officer</div>
-        <p>A proven leader in life sciences and healthcare. Inspired by his daughter Olivia's journey, he shapes our strategy and partnerships.</p>
+        <div class="card-top card-rose">
+          <img class="ph" src="assets/team-2.png" alt="Joshua Davis">
+          <h3>Joshua Davis</h3>
+          <div class="role">Co-Founder &amp;<br>Chief Executive Officer</div>
+        </div>
+        <p class="bio">Josh is a proven business leader and commercialization strategist in life sciences and healthcare. Inspired by his daughter Olivia's dyslexia journey, he shapes Dyslexia Pal's go-to-market strategy and partnerships.</p>
       </div>
       <div class="member">
-        <img class="ph" src="assets/team-1.jpeg" alt="Steven Krane">
-        <h3>Steven Krane</h3>
-        <div class="role">Co-Founder &amp;<br>Chief Strategy Officer</div>
-        <p>Founder and builder of twelve companies across six industries with multiple exits, bringing that builder's instinct to every venture.</p>
+        <div class="card-top card-gold">
+          <img class="ph" src="assets/team-1.jpeg" alt="Steven Krane">
+          <h3>Steven Krane</h3>
+          <div class="role">Co-Founder &amp;<br>Chief Strategy Officer</div>
+        </div>
+        <p class="bio">Steven has founded and built twelve companies across six industries with multiple exits, launching his first at 17. A lifelong entrepreneur and advisor to founders, he brings that builder's instinct to every venture.</p>
       </div>
       <div class="member">
-        <img class="ph" src="assets/team-3.png" alt="Nanci Shepardson">
-        <h3>Nanci Shepardson</h3>
-        <div class="role">Chief Content Officer</div>
-        <p>A K-12 reading specialist (Wilson, CERI, CPACC certified) and champion of the Science of Reading who raised a child with dyslexia.</p>
+        <div class="card-top card-sky">
+          <img class="ph" src="assets/team-3.png" alt="Nanci Shepardson">
+          <h3>Nanci Shepardson</h3>
+          <div class="role">Chief Content Officer</div>
+        </div>
+        <p class="bio">Nanci Shepardson is a K-12 Reading Specialist, Wilson, CERI, and CPACC certified, who writes and speaks nationally on dyslexia. A champion of the Science of Reading, her work is personal: she raised a child with dyslexia.</p>
       </div>
       <div class="member">
-        <img class="ph" src="assets/team-4.png" alt="Marc Asselin">
-        <h3>Marc Asselin</h3>
-        <div class="role">Chief Technology Officer</div>
-        <p>35+ years in software development, system architecture, and innovation leadership—from AI and digital twins to defense training systems—building mission-driven technology with real-world impact.</p>
+        <div class="card-top card-sky2">
+          <img class="ph" src="assets/team-4.png" alt="Marc Asselin">
+          <h3>Marc Asselin</h3>
+          <div class="role">CTO</div>
+        </div>
+        <p class="bio">Mark brings 35+ years in software development, system architecture, and innovation leadership. From AI and digital twins to defense training systems, he builds mission-driven technology with real-world impact.</p>
       </div>
     </div>
   </div>
