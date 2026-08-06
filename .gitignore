@@ -10,6 +10,12 @@ CLAUDE.md
 **/.DS_Store
 *.inspect.ndjson
 
+# FUSE-mount temp files (this folder is a network/FUSE mount)
+.fuse_hidden*
+
+# Local publish helper (personal tooling, not part of the site)
+/deploy.sh
+
 # Unused reference assets (kept locally, not part of the live site)
 # Delete these lines if you ever want to publish them.
 assets/Dyslexia_Pal_Icon.png
