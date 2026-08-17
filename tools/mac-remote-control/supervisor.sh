@@ -20,6 +20,7 @@ TMUX_BIN="__TMUX_BIN__"
 TMUX_SESSION="__TMUX_SESSION__"
 RC_NAME="__RC_NAME__"
 SPAWN_MODE="__SPAWN_MODE__"
+CAPACITY="__CAPACITY__"   # empty means leave Claude Code's default of 32
 POLL_SECONDS=30
 
 # Remote Control depends on feature-flag evaluation, which these switches turn
@@ -50,6 +51,7 @@ while true; do
   if ! "$TMUX_BIN" has-session -t "$TMUX_SESSION" 2>/dev/null; then
     log "starting claude remote-control"
     RC_CMD="$(shq "$CLAUDE_BIN") remote-control --name $(shq "$RC_NAME") --spawn $(shq "$SPAWN_MODE")"
+    [ -n "$CAPACITY" ] && RC_CMD="$RC_CMD --capacity $(shq "$CAPACITY")"
     "$TMUX_BIN" new-session -d -s "$TMUX_SESSION" -c "$PROJECT_DIR" "$RC_CMD"
     if [ $? -eq 0 ]; then
       log "started; attach on this Mac with: tmux attach -t $TMUX_SESSION"

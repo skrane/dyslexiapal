@@ -38,6 +38,7 @@ Options:
 ```bash
 RC_NAME="Mac mini" ./install.sh ~/code/dyslexiapal    # custom title in the app
 RC_SPAWN_MODE=worktree ./install.sh ~/code/repo       # each new session gets its own git worktree
+RC_CAPACITY=2 ./install.sh ~/some/folder              # cap concurrent sessions (default 32)
 ```
 
 `same-dir` (the default) means every session the phone creates shares that one
@@ -46,6 +47,34 @@ them and needs the directory to be a git repo.
 
 **Don't point it at your home directory.** Claude Code never saves workspace
 trust for `$HOME`, so the server would hang forever on the trust prompt.
+
+## Pointing it at a Google Drive folder
+
+This works, and `install.sh` detects it and warns, but a synced folder is not a
+normal working directory:
+
+```bash
+RC_CAPACITY=2 RC_NAME="Mac mini" \
+  ./install.sh "$HOME/Library/CloudStorage/GoogleDrive-you@example.com/My Drive/Your Folder"
+```
+
+- **Mark the folder available offline** in Drive. Otherwise files are
+  placeholders that download on first read — slow, and they fail when the Mac
+  is offline, which is exactly when a phone session is most likely to be
+  reaching for them.
+- **Cap concurrency.** The default lets the phone open 32 sessions in the same
+  directory. Several of them writing to a syncing folder is how you get
+  Drive's conflicted copies. `RC_CAPACITY=2` is a reasonable ceiling.
+- **`worktree` mode is unavailable** unless the folder is a git repo, which
+  Drive folders normally are not. You get `same-dir`.
+- **Full Disk Access.** A launchd agent may not be allowed to read
+  `~/Library/CloudStorage`. If the log shows permission errors, grant Full Disk
+  Access to `/bin/bash` in System Settings → Privacy & Security.
+- **Everything in that folder is reachable from the phone.** Server mode means
+  anyone who can get into your Claude account can open a session with read and
+  write access to the whole directory. If it holds client material, that is the
+  real blast radius — worth a passcode on the phone and leaving permission
+  prompts on rather than running sessions in a bypass mode.
 
 ## What gets installed
 

@@ -27,6 +27,12 @@ RC_NAME="$(printf '%s' "$RC_NAME" | tr -cd '[:alnum:] ._-')"
 [ -n "$RC_NAME" ] || RC_NAME="mac"
 RC_SPAWN_MODE="${RC_SPAWN_MODE:-same-dir}"
 RC_TMUX_SESSION="${RC_TMUX_SESSION:-claude-rc}"
+RC_CAPACITY="${RC_CAPACITY:-}"
+
+# Escape a string for use as a sed *replacement*. Cloud-sync folders are named
+# by humans, and an unescaped & expands to the whole match, silently corrupting
+# the path it was supposed to insert.
+sed_rep() { printf '%s' "$1" | sed -e 's/[\\&|]/\\&/g'; }
 
 die() { printf '\033[31merror:\033[0m %s\n' "$*" >&2; exit 1; }
 ok()   { printf '\033[32m  ok\033[0m  %s\n' "$*"; }
@@ -59,6 +65,20 @@ PROJECT_DIR="$(cd "$PROJECT_DIR" 2>/dev/null && pwd)" \
 [ "$PROJECT_DIR" != "$HOME" ] \
   || die "don't use your home directory: Claude Code never saves workspace trust for \$HOME, so the server would stall on the trust prompt. Pick a project folder."
 ok "project directory: $PROJECT_DIR"
+
+# Cloud-sync folders work, but they behave differently enough from a normal
+# working directory to be worth calling out before anything is installed.
+case "$PROJECT_DIR" in
+  */Library/CloudStorage/*|*/Google?Drive*|*/Dropbox/*|*/OneDrive*|*/Library/Mobile?Documents/*)
+    warn "$PROJECT_DIR looks like a cloud-sync folder. Three things to know:"
+    warn "  1. Set the folder to available offline. Files-on-demand placeholders"
+    warn "     make reads slow, and they fail outright when the Mac is offline."
+    warn "  2. Concurrent sessions editing the same synced files can produce"
+    warn "     conflicted copies. Consider RC_CAPACITY=1 or 2."
+    warn "  3. If the agent cannot read the folder, grant Full Disk Access to"
+    warn "     /bin/bash under System Settings > Privacy & Security."
+    ;;
+esac
 
 CLAUDE_BIN="$(command -v claude || true)"
 [ -n "$CLAUDE_BIN" ] || die "'claude' not found on PATH. Install Claude Code first."
@@ -102,16 +122,27 @@ if [ "$RC_SPAWN_MODE" = "worktree" ] && ! git -C "$PROJECT_DIR" rev-parse --git-
   die "RC_SPAWN_MODE=worktree needs $PROJECT_DIR to be a git repository"
 fi
 
+if [ -n "$RC_CAPACITY" ]; then
+  case "$RC_CAPACITY" in
+    ''|*[!0-9]*) die "RC_CAPACITY must be a whole number (got '$RC_CAPACITY')" ;;
+    0)           die "RC_CAPACITY must be at least 1" ;;
+  esac
+  [ "$RC_SPAWN_MODE" != "session" ] \
+    || die "RC_CAPACITY cannot be combined with RC_SPAWN_MODE=session, which serves exactly one session by definition"
+  ok "capacity: $RC_CAPACITY concurrent session(s)"
+fi
+
 # ---------------------------------------------------------------- install
 mkdir -p "$INSTALL_DIR" "$HOME/Library/LaunchAgents" "$(dirname "$LOG_FILE")"
 
 sed \
-  -e "s|__CLAUDE_BIN__|$CLAUDE_BIN|g" \
-  -e "s|__PROJECT_DIR__|$PROJECT_DIR|g" \
-  -e "s|__TMUX_BIN__|$TMUX_BIN|g" \
-  -e "s|__TMUX_SESSION__|$RC_TMUX_SESSION|g" \
-  -e "s|__RC_NAME__|$RC_NAME|g" \
-  -e "s|__SPAWN_MODE__|$RC_SPAWN_MODE|g" \
+  -e "s|__CLAUDE_BIN__|$(sed_rep "$CLAUDE_BIN")|g" \
+  -e "s|__PROJECT_DIR__|$(sed_rep "$PROJECT_DIR")|g" \
+  -e "s|__TMUX_BIN__|$(sed_rep "$TMUX_BIN")|g" \
+  -e "s|__TMUX_SESSION__|$(sed_rep "$RC_TMUX_SESSION")|g" \
+  -e "s|__RC_NAME__|$(sed_rep "$RC_NAME")|g" \
+  -e "s|__SPAWN_MODE__|$(sed_rep "$RC_SPAWN_MODE")|g" \
+  -e "s|__CAPACITY__|$(sed_rep "$RC_CAPACITY")|g" \
   "$SCRIPT_DIR/supervisor.sh" > "$INSTALL_DIR/supervisor.sh"
 chmod +x "$INSTALL_DIR/supervisor.sh"
 ok "supervisor installed to $INSTALL_DIR/supervisor.sh"
