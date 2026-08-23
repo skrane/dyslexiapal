@@ -38,6 +38,9 @@
   .topbar .meta{font-size:13px;color:var(--muted);font-weight:600;}
   .stage{flex:1;display:flex;align-items:center;justify-content:center;padding:22px;position:relative;overflow:hidden;}
   .stage img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:10px;box-shadow:0 24px 60px -24px rgba(9,114,118,.45);background:#fff;}
+  #slidelink{position:absolute;display:none;z-index:6;border-radius:6px;transition:background .15s;}
+  #slidelink.on{display:block;}
+  #slidelink:hover{background:rgba(229,83,63,.16);}
   .nav{position:absolute;top:0;bottom:0;width:22%;cursor:pointer;display:flex;align-items:center;z-index:5;border:none;background:transparent;}
   .nav.prev{left:0;justify-content:flex-start;padding-left:14px;}
   .nav.next{right:0;justify-content:flex-end;padding-right:14px;}
@@ -61,7 +64,7 @@
     </div>
     <div class="stage" id="stage">
       <button class="nav prev" id="prev" aria-label="Previous"><span class="chev">&#10094;</span></button>
-      <img id="slide" alt="Slide">
+      <img id="slide" alt="Slide"><a id="slidelink" href="https://www.dyslexiapal.com/" target="_blank" rel="noopener" title="Visit dyslexiapal.com" aria-label="Visit dyslexiapal.com"></a>
       <button class="nav next" id="next" aria-label="Next"><span class="chev">&#10095;</span></button>
     </div>
     <div class="bottombar">
@@ -78,7 +81,23 @@ var i=0;
 var img=document.getElementById('slide');
 var counter=document.getElementById('counter');
 var prev=document.getElementById('prev'), next=document.getElementById('next');
-function render(){img.src=slides[i];counter.textContent=(i+1)+' / '+slides.length;prev.disabled=(i===0);next.disabled=(i===slides.length-1);}
+var slidelink=document.getElementById('slidelink');
+var stage=document.getElementById('stage');
+var LINK_SLIDE=slides.length-1;              /* the website slide */
+var HOT={l:0.366,t:0.784,w:0.264,h:0.066};   /* link box, as a fraction of the slide */
+function placeLink(){
+  if(i!==LINK_SLIDE||!img.naturalWidth){slidelink.className='';return;}
+  var ir=img.getBoundingClientRect(), sr=stage.getBoundingClientRect();
+  slidelink.style.left=(ir.left-sr.left+ir.width*HOT.l)+'px';
+  slidelink.style.top=(ir.top-sr.top+ir.height*HOT.t)+'px';
+  slidelink.style.width=(ir.width*HOT.w)+'px';
+  slidelink.style.height=(ir.height*HOT.h)+'px';
+  slidelink.className='on';
+}
+img.addEventListener('load',placeLink);
+window.addEventListener('resize',placeLink);
+document.addEventListener('fullscreenchange',function(){setTimeout(placeLink,60);});
+function render(){img.src=slides[i];counter.textContent=(i+1)+' / '+slides.length;prev.disabled=(i===0);next.disabled=(i===slides.length-1);placeLink();}
 function go(d){var n=i+d;if(n<0||n>=slides.length)return;i=n;render();}
 prev.onclick=function(){go(-1);};next.onclick=function(){go(1);};
 document.getElementById('b-prev').onclick=function(){go(-1);};
