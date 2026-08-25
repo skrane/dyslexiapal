@@ -61,7 +61,6 @@
   textarea{min-height:132px;resize:vertical;}
   input::placeholder,textarea::placeholder{color:var(--muted);opacity:.75;}
   input:focus,textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px var(--ring);}
-  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 
   .cta{
     display:inline-flex;align-items:center;gap:12px;align-self:flex-start;margin-top:4px;
@@ -114,10 +113,6 @@
         <div class="row">
           <label for="msg">What you think</label>
           <textarea id="msg" name="msg" placeholder="Anything at all &mdash; the honest version is the useful one."></textarea>
-        </div>
-        <div class="hp" aria-hidden="true">
-          <label for="company">Company</label>
-          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
         </div>
         <div class="msg err" id="err"></div>
         <button class="cta" id="btn" type="submit">
@@ -180,7 +175,7 @@
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         name: name, email: email, msg: msg,
-        company: document.getElementById('company').value
+        company: ''   // honeypot disabled: it silently ate a real submission
       })
     })
     .then(function (r) { return r.json(); })
