@@ -127,8 +127,6 @@
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 7"/></svg>
       </div>
       <h1>Thank you.</h1>
-      <p class="lead" id="doneMsg">That has reached Steven, and a copy is in your inbox.</p>
-      <p>He reads every one of these himself, and he will come back to you personally.</p>
     </div>
 
   </div>
@@ -181,9 +179,6 @@
     .then(function (r) { return r.json(); })
     .then(function (res) {
       if (!res || res.ok !== true) { throw new Error(res && res.error ? res.error : 'send failed'); }
-      if (!res.cc) {
-        document.getElementById('doneMsg').textContent = 'That has reached Steven.';
-      }
       document.getElementById('ask').style.display = 'none';
       document.getElementById('done').classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
